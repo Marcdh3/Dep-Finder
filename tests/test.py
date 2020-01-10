@@ -1,6 +1,6 @@
 import unittest
 
-import coveralls
+#import coveralls
 
 class DepTest(unittest.TestCase):
     def test_pass(self):
