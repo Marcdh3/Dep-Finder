@@ -1,5 +1,5 @@
 import unittest
 
-class DepTest(unittest.TestCase):
+class Test2(unittest.TestCase):
     def test_pass(self):
         self.assertTrue(True)
