@@ -2,7 +2,7 @@
 Python package dependency finder
 ## Installation
 ### Dependencies
-All of the project dependencies are listed in the "requirements.txt" file.
+All of the project dependencies are listed in the [requirements.txt](requirements.txt).
 ### Install steps
 Inside the base directory of the project run the following commands to install all dependencies and install the depfinder package:
 ```
