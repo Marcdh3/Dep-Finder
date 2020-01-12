@@ -12,7 +12,7 @@ pip install .
 ### Tests
 Run the following commands to ensure depfinder installed correctly:
 ```
-python -m depfinder.test
+python tests/main.py
 ```
 1 test should run without any errors.
 ## Usage

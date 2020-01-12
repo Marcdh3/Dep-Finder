@@ -4,7 +4,7 @@ Runs installation tests for depfinder package.
 
 import unittest
 
-from . import test_finder
+import test_finder
 
 if __name__ == '__main__':
     loader = unittest.TestLoader()
