@@ -10,4 +10,5 @@ install:
 script:
   - coverage run --source=depfinder -m unittest discover -s tests
 after_success:
+  - coveralls
   - bash <(curl -s https://codecov.io/bash)
