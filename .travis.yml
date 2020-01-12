@@ -9,5 +9,6 @@ install:
   - pip install .
 script:
   - coverage run --source=depfinder -m unittest discover -s tests
+  - coverage xml
 after_success:
   - bash <(curl -s https://codecov.io/bash)
