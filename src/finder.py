@@ -1,15 +1,15 @@
 '''
-Finds and prints to stdout all dependencies of a package.
+Finds all the dependencies of package.
 '''
 #Author: Marcus Hill
 
 import re
 import os
+import argparse
 
 def find_deps(query_package, current_package=None, package_list=[]):
     '''
-    Function that recursively finds all dependencies of a
-    package.
+    Recursively finds all dependencies of a package.
 
     Paramaters
     ----------
@@ -29,18 +29,20 @@ def find_deps(query_package, current_package=None, package_list=[]):
 
     if current_package == None:
         current_package = query_package
-
+    
+    reqs = None
     os.system('pip show ' + current_package + ' > /tmp/req.txt')
     with open('/tmp/req.txt') as fp:
         for line in fp.read().split('\n'):
             if 'Requires' in line:
                 reqs = line
 
-    reqs = re.sub('Requires:| ', '', reqs).split(',')
-    if reqs != ['']:
-        for dep in reqs:
-            if dep not in package_list:
-                package_list = find_deps(query_package, dep, package_list)
+    if reqs != None:
+        reqs = re.sub('Requires:| ', '', reqs).split(',')
+        if reqs != ['']:
+            for dep in reqs:
+                if dep not in package_list:
+                    package_list = find_deps(query_package, dep, package_list)
 
     if(current_package not in package_list 
         and current_package != query_package):
@@ -67,5 +69,12 @@ def generate_requirements(dependencies):
         os.system('pip freeze | grep -i ' + package + '==')
 
 if __name__ == '__main__':
-    dependencies = find_deps('depfinder') #ornet
+    parser = argparse.ArgumentParser(description='Find and print to stdout \
+                                                  all the dependencies of a \
+                                                  package.')
+    parser.add_argument('-i', '--input', required=True,
+                        help='Name of the query package.')
+    args = vars(parser.parse_args())
+
+    dependencies = find_deps(args['input'])
     generate_requirements(dependencies)
