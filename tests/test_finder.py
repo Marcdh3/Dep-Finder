@@ -8,4 +8,4 @@ class FinderTest(unittest.TestCase):
         ground_truth = ['coverage', 'chardet', 'idna', 'urllib3', 
                           'requests', 'docopt', 'coveralls']
         result = [True for package in ground_truth if package in deps]
-        self.assertTrue(sum(result) == len(result))
+        self.assertEqual(sum(result), len(result))
