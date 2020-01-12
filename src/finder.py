@@ -1,5 +1,5 @@
 '''
-Finds all the dependencies of package.
+Utility that performs the dependency searches.
 '''
 #Author: Marcus Hill
 
@@ -67,14 +67,3 @@ def generate_requirements(dependencies):
     dependencies.sort()
     for package in dependencies:
         os.system('pip freeze | grep -i ' + package + '==')
-
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Find and print to stdout \
-                                                  all the dependencies of a \
-                                                  package.')
-    parser.add_argument('-i', '--input', required=True,
-                        help='Name of the query package.')
-    args = vars(parser.parse_args())
-
-    dependencies = find_deps(args['input'])
-    generate_requirements(dependencies)
