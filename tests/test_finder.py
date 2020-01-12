@@ -7,6 +7,5 @@ class FinderTest(unittest.TestCase):
         deps = df.find_deps('depfinder')
         ground_truth = ['coverage', 'chardet', 'idna', 'urllib3', 
                           'requests', 'docopt', 'coveralls']
-        deps.sort()
-        ground_truth.sort()
-        self.assertEqual(deps, ground_truth)
+        result = [True for package in ground_truth if package in deps]
+        self.assertTrue(sum(result) == len(result))
