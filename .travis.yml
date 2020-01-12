@@ -8,6 +8,7 @@ install:
   - pip install -r requirements.txt
   - pip install .
 script:
+  - pip show certifi
   - coverage run --source=depfinder -m unittest discover -s tests
 after_success:
   - coveralls
