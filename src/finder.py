@@ -30,27 +30,42 @@ def find_deps(query_package, current_package=None, package_list=[]):
     if current_package == None:
         current_package = query_package
 
-    #print(query_package)
-    os.system('pip show ' + current_package + ' > tmp.txt')
-    with open('tmp.txt') as fp:
+    os.system('pip show ' + current_package + ' > /tmp/req.txt')
+    with open('/tmp/req.txt') as fp:
         for line in fp.read().split('\n'):
             if 'Requires' in line:
                 reqs = line
 
-    #print(reqs)
     reqs = re.sub('Requires:| ', '', reqs).split(',')
     if reqs != ['']:
         for dep in reqs:
             if dep not in package_list:
-                find_deps(query_package, dep, package_list)
-    else:
-        if current_package not in package_list:
-            package_list.append(current_package)
+                package_list = find_deps(query_package, dep, package_list)
+
+    if(current_package not in package_list 
+        and current_package != query_package):
+        package_list.append(current_package)
     
-    if current_package == query_package:
-        os.remove('tmp.txt')
     return package_list
 
+def generate_requirements(dependencies):
+    '''
+    Prints to stdout the dependencies in a format suitable
+    for a "requirements.txt" file.
+
+    Parameters
+    ----------
+    dependencies: list of string
+        list of dependencies
+
+    Returns
+    ---------
+    NoneType object
+    '''
+    dependencies.sort()
+    for package in dependencies:
+        os.system('pip freeze | grep -i ' + package + '==')
+
 if __name__ == '__main__':
-    #print(find_deps('ornet'))
-    print(find_deps('depfinder'))
+    dependencies = find_deps('depfinder') #ornet
+    generate_requirements(dependencies)
