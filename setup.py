@@ -7,4 +7,5 @@ setuptools.setup(
     package_dir={'depfinder':'src'},
     install_requires=[
         'coverage',
+        'coveralls'
     ])
