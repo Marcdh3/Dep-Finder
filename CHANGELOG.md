@@ -1,10 +1,9 @@
 # Dep-Finder
 
-## v1.1
+## v2.0
 ### Changed 
 Dropped support for python 3.6
 
-## v1.0.2
 ### Security
 - Using subprocess module instead of os
 
