@@ -4,7 +4,7 @@ This software retrieves all dependencies of local python packages that were inst
 ### Dependencies
 This project's dependencies are listed in the [requirements.txt](requirements.txt) file.
 ### Install steps
-Inside the base directory of the project, run the following commands to install dependencies and the depfinder package:
+Inside the base directory of this project, run the following commands to install dependencies and the depfinder package:
 ```
 pip install -r requirements.txt
 pip install .
