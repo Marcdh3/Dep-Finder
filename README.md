@@ -14,7 +14,7 @@ Run the following commands to ensure depfinder installed correctly:
 ```
 python tests/main.py
 ```
-1 test should run without any errors.
+2 tests should run without any errors.
 ## Usage
 The depfinder utility can be executed from the command line to find all of the dependencies of a package, and print to stdout all of the necessary packages in a format suitable to generate a requirement.txt file. 
 ### Example

@@ -1,11 +1,9 @@
 '''
 Utility that performs the dependency searches.
 '''
-#Author: Marcus Hill
 
 import re
 import os
-import argparse
 
 def find_deps(query_package, current_package=None, package_list=[]):
     '''
@@ -31,8 +29,7 @@ def find_deps(query_package, current_package=None, package_list=[]):
         current_package = query_package
     
     reqs = None
-    os.system('pip show ' + current_package + ' > /tmp/req.txt')
-    with open('/tmp/req.txt') as fp:
+    with os.popen('pip show ' + current_package) as fp:
         for line in fp.read().split('\n'):
             if 'Requires' in line:
                 reqs = line
@@ -52,7 +49,7 @@ def find_deps(query_package, current_package=None, package_list=[]):
 
 def generate_requirements(dependencies):
     '''
-    Prints to stdout the dependencies in a format suitable
+    Generates the dependencies in a format suitable
     for a "requirements.txt" file.
 
     Parameters
@@ -62,8 +59,16 @@ def generate_requirements(dependencies):
 
     Returns
     ---------
-    NoneType object
+    results: list of string
+        Dependencies with thier version numbers
     '''
+    
+    results = []
     dependencies.sort()
     for package in dependencies:
-        os.system('pip freeze | grep -i ' + package + '==')
+        with os.popen('pip freeze | grep -i ' + package + '==') as fp:
+            req = re.sub('\n', '', fp.read())
+            if req != '':
+                results.append(req)
+
+    return results
