@@ -12,9 +12,9 @@ pip install .
 ### Tests
 Run the following command to ensure depfinder was installed correctly:
 ```
-python tests/main.py
+python tests/tests.py
 ```
-2 tests should run without any errors.
+3 tests should run without any errors.
 ## Usage
 The depfinder utility can print to stdout all dependencies of a package in a format that is suitable for requirements.txt files. 
 ### Example

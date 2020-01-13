@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name='depfinder',
-    version='1.0',
+    version='1.0.1',
     description='This software retrieves all dependencies of local python '
                  + 'packages that were installed via pip.',
     author='Marcus Hill',
