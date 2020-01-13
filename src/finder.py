@@ -3,7 +3,7 @@ Utility that performs the dependency searches.
 '''
 
 import re
-import os
+import subprocess
 
 def find_deps(query_package, current_package=None, package_list=[]):
     '''
@@ -29,9 +29,10 @@ def find_deps(query_package, current_package=None, package_list=[]):
         current_package = query_package
     
     reqs = None
-    with os.popen('pip show ' + current_package) as fp:
-        for line in fp.read().split('\n'):
-            if 'Requires' in line:
+    pip_text = subprocess.run(['pip', 'show', current_package],
+                   stdout=subprocess.PIPE, text=True).stdout.split('\n')
+    for line in pip_text:
+        if 'Requires' in line:
                 reqs = line
 
     if reqs != None:
@@ -66,9 +67,16 @@ def generate_requirements(dependencies):
     results = []
     dependencies.sort()
     for package in dependencies:
-        with os.popen('pip freeze | grep -i ' + package + '==') as fp:
-            req = re.sub('\n', '', fp.read())
-            if req != '':
-                results.append(req)
+        pip_freeze = subprocess.Popen(['pip', 'freeze'],
+                       stdout=subprocess.PIPE)
+        grep_text = subprocess.run(['grep', '-i', package + '=='],
+                                   stdin=pip_freeze.stdout,
+                                   stdout=subprocess.PIPE,
+                                   text=True).stdout
+        pip_freeze.stdout.close()
+        pip_freeze.wait()
+        req = re.sub('\n', '', grep_text)
+        if req != '':
+            results.append(req)
 
     return results

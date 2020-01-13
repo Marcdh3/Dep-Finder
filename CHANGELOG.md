@@ -1,5 +1,9 @@
 # Dep-Finder
 
+## v1.0.2
+### Security
+- Using subprocess module instead of os
+
 ## v1.0.1
 ### Security
 - Added an additional unit test to increase code coverage.
