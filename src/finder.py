@@ -15,13 +15,13 @@ def find_deps(query_package, current_package=None, package_list=[]):
         Name of the query package.
     current_package: string
         Current package to recursively search.
-    package_list: list of string
+    package_list: list of strings
         List that will be populated with dependencies of
         the query package.
 
     Returns
     ----------
-    package_list: list of string
+    package_list: list of strings
         Complete list of unique dependencies.
     '''
 
@@ -54,12 +54,12 @@ def generate_requirements(dependencies):
 
     Parameters
     ----------
-    dependencies: list of string
+    dependencies: list of strings
         list of dependencies
 
     Returns
     ---------
-    results: list of string
+    results: list of strings
         Dependencies with thier version numbers
     '''
     
