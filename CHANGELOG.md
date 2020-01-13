@@ -1,6 +1,6 @@
-#Dep-Finder
+# Dep-Finder
 
-##v1.0.1
+## v1.0.1
 ### Security
 - Added an additional unit test to increase code coverage.
 
