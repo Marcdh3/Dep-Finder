@@ -4,6 +4,7 @@ Utility that performs the dependency searches.
 
 import re
 import subprocess
+from tqdm import tqdm
 
 def find_deps(query_package, current_package=None, package_list=[]):
     '''
