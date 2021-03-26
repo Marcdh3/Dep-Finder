@@ -21,3 +21,6 @@ The depfinder utility can print to stdout all dependencies of a package in a for
 ```
 python -m depfinder -i <query package>
 ```
+## Future
+- Add an ignore package option 
+- Add an exclude-self flag
